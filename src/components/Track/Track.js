@@ -1,11 +1,17 @@
 import React from "react";
 import "./Track.module.css"
 
-function Track ({name, artist, album}) {
+function Track({ track, onAdd, onRemove, isRemoval }) {
+    const handleAdd = () => onAdd(track);
+    const handleRemove = () => onRemove(track);
     return (
         <div className="Track">
-            <p>{name} - {artist} - {album}</p>
-            <button>+</button>
+            <div className="Track-information">
+                <h3>{track.name}</h3>
+                <p>{track.artist} | {track.album}</p>
+            </div>
+            {isRemoval ? (<button className="Track-action" onRemove={handleRemove}>-</button>) :
+                (<button className="Track-action" onClick={handleAdd}>+</button>)}
         </div>
     )
 }
