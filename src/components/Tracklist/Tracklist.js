@@ -1,8 +1,9 @@
 import React from "react";
 import Track from '../Track/Track';
-import "./Tracklist.module.css"
+import "./Tracklist.css"
 
 function Tracklist({ tracks, onAdd, onRemove, isRemoval }) {
+    console.log(tracks)
     return (
         <div className="Tracklist">
             {tracks.map((track) => (

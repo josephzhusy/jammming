@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import Tracklist from '../Tracklist/Tracklist'
-import './Playlist.module.css'
+import './Playlist.css'
 
 function Playlist({ playlistName, playlistTracks, onRemove, onSave, onNameChange }) {
-    const [name, setName] = useState(playlistName);
+    const [name, setName] = useState("");
     const [message, setMessage] = useState("")
     const handleNameChange = (event) => {
         const newName = event.target.value;
@@ -12,10 +12,18 @@ function Playlist({ playlistName, playlistTracks, onRemove, onSave, onNameChange
     }
 
     const handleSave = async () => {
+        if (!name.trim()) {
+            setMessage("Please enter a playlist name.");
+            setTimeout(() => {
+                setMessage('')
+            }, 3000);
+            return;
+        }
         const trackUris = playlistTracks.map(track => track.uri);
         try {
-            await onSave(playlistName, trackUris);
-            setMessage("Playlist successfully saved to Spotify!");
+            await onSave(name, trackUris);
+            setMessage(`Playlist ${name} successfully saved to Spotify!`);
+            setName('');
             setTimeout(() => {
                 setMessage('')
             }, 3000);
@@ -35,6 +43,7 @@ function Playlist({ playlistName, playlistTracks, onRemove, onSave, onNameChange
                 className="Playlist-name"
                 type="text"
                 value={name}
+                placeholder="Enter playlist name..."
                 onChange={handleNameChange}
                 onBlur={handleNameBlur}
             />

@@ -36,12 +36,14 @@ const Spotify = {
                 return [];
             }
             return jsonResponse.tracks.items.map(track => ({
-                id: track.id,
-                name: track.name,
-                artist: track.artists[0].name,
-                album: track.album.name,
-                uri: track.uri,
-            }))
+                    id: track.id,
+                    name: track.name,
+                    artist: track.artists[0].name,
+                    album: track.album.name,
+                    uri: track.uri,
+                    previewUrl: track.preview_url,
+                }))
+                
         } catch (error) {
             console.error('Error fetching tracks:', error)
             return [];
