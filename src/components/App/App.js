@@ -4,7 +4,7 @@ import SearchResults from '../SearchResults/SearchResults';
 import Playlist from '../Playlist/Playlist';
 import Spotify from '../../util/Spotify';
 import './App.css';
-import { use } from 'react';
+
 
 function App() {
   const [searchResults, setSearchResults] = useState([])
